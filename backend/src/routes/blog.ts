@@ -94,8 +94,8 @@ blogRouter.get('/:id',async (c)=>{
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
-    const id = c.req.param("id")
     try{
+        const id = c.req.param("id")
         const blog = await prisma.post.findFirst({
             where : {
                 id : Number(id)
