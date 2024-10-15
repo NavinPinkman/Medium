@@ -12,10 +12,14 @@ export const Signupbox = ({ type } : {type : "signup" | "signin"})=>{
         password : ""
     })
 
+interface ResponseData{
+    jwt : string
+}
+
     async function sendReq(){
         try{
-            const response = await axios.post(`${backend_url}/api/v1/user/signup`,postInput);
-            const jwt = response.data as string;
+            const response = await axios.post<ResponseData>(`${backend_url}/api/v1/user/signup`,postInput);
+            const jwt  = response.data.jwt
             localStorage.setItem("token",jwt)
             navigate('/blogs')
         }catch(e){
