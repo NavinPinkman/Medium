@@ -1,54 +1,52 @@
+import { Link } from "react-router-dom"
+import { Avatar } from "./avatar"
+
 interface cardTypes {
     authorName : string,
     publishedDate : string,
     title : string,
-    content : string
+    content : string,
+    id : number
 }
 
 export const BlogCard = ({
     authorName,
     publishedDate,
     title,
-    content
+    content,
+    id
 }:cardTypes)=>{
 
     return (
-        <div>
-            < div className="mt-6">
-                <div className="flex ">
-                    <div><Avatar name={authorName}/></div>
-                    <div className="font-semibold mr-2"> {authorName} </div>
-                    <div className="flex justify-center flex-col mr-3"><Circle/></div>
-                    <div className=" text-slate-500"> {publishedDate} </div>
+       <Link to={`/blog/${id}`}>
+            <div className=" p-7 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer ">
+                <div className="flex">
+                    <Avatar name={authorName} />
+                    <div className="font-extralight pl-2 text-sm flex justify-center flex-col">{authorName}</div>
+                    <div className="flex justify-center flex-col pl-2">
+                        <Circle />
+                    </div>
+                    <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
+                        {publishedDate}
+                    </div>
                 </div>
-                <div className="font-extrabold text-xl mt-3">
+                <div className="text-xl font-semibold pt-2">
                     {title}
                 </div>
-                <div className="text-md mt-2">
-                    {content.slice(0,250) +"..."}
+                <div className="text-md font-thin">
+                    {content.slice(0, 100) + "..."}
                 </div>
-                <div className=" text-slate-500 mt-6">
-                    {`${Math.ceil(content.length / 100)} min read`}
+                <div className="text-slate-500 text-sm font-thin pt-4">
+                    {`${Math.ceil(content.length / 100)} minute(s) read`}
                 </div>
-                <div className="mt-6">
-                    <hr />
-                </div>
-            </div>
         </div>
+    </Link>
     )
 }
 
-function Circle(){
+export function Circle(){
     return <div className="w-1 h-1 bg-slate-500 rounded-full">
 
     </div>
 }
 
-function Avatar({name} : {name : string}){
-    return ( 
-            <div className=" mr-2 relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span className="font-medium text-gray-600 dark:text-gray-300  ">{name[0]}</span>
-            </div>
-            
-    )
-}

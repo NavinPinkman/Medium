@@ -1,4 +1,5 @@
 import { BlogCard } from "../component/Blogcard"
+import { BlogSkeleton } from "../component/blogskeleton"
 import { Navbar } from "../component/navbar"
 import { useBlogs } from "../hooks"
 
@@ -6,18 +7,26 @@ export const Blogs= ()=>{
     const {loading , blogs}  = useBlogs()
     if(loading){
         return <div>
-            Loading
+            <Navbar name="Navin"/>
+            <div className="flex justify-center">
+               <div className="flex flex-col justify-center my-6 ">
+                    <BlogSkeleton/>
+                    <BlogSkeleton/>
+                    <BlogSkeleton/>
+                    <BlogSkeleton/>
+                    <BlogSkeleton/>
+               </div>
+            </div>
         </div>
     }
 
     return (
         <div>
-            <Navbar name="Priya V."/>
+            <Navbar name={"Navin Venkat"}/>
              <div className="flex justify-center">
-            <div className=" max-w-3xl ">
-                {blogs.map(blog => <BlogCard authorName={blog.title} publishedDate="Dec 3 2004" content="
-                Joanne Rowling CH OBE FRSL, known by her pen name J. K. Rowling, is a British author and philanthropist. She wrote Harry Potter, a seven-volume fantasy series published from 1997 to 2007." 
-                title="How an girl who become an successfull story writer"/>)}
+            <div className="my-6">
+                {blogs.map(blog => <BlogCard id={blog.id} authorName={blog.author.name || "harkirat singh"} publishedDate="Dec 3 2004" content={blog.content}
+                title={blog.title}/>)}
             </div>
         </div>
         </div>
