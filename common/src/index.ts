@@ -17,7 +17,7 @@ export const signinSchema = z.object({
 export const blogSchema = z.object({
     title : z.string(),
     content : z.string(),
-    published : z.boolean()
+    published : z.boolean().optional()
 })
 
 
